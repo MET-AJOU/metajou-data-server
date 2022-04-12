@@ -18,9 +18,10 @@ public class ProfileService {
         return getProfileFromRepo(user).flatMap(profile -> Mono.just(profile.extractGetProfile()));
     }
 
-    public Mono<Profile> updateProfile(CustomUser user, UpdateProfileDto updateDto) {
+    public Mono<GetProfileDto> updateProfile(CustomUser user, UpdateProfileDto updateDto) {
         return getProfileFromRepo(user).doOnNext(profile -> updateDto.updateProfile(profile))
                 .flatMap(profile -> profileRepository.save(profile))
+                .flatMap(profile -> Mono.just(profile.extractGetProfile()))
                 .doOnError(throwable -> ErrorCode.CANT_UPDATE_PROFILE.build());
     }
 

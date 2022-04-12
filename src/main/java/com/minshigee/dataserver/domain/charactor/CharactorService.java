@@ -19,7 +19,7 @@ public class CharactorService {
         return getCharactorFromRepo(user).flatMap(charactor -> Mono.just(charactor.extractGetCharactorDto()));
     }
 
-    public Mono<Charactor> updateCharactor(CustomUser user, UpdateCharactorDto updateDto) {
+    public Mono<GetCharactorDto> updateCharactor(CustomUser user, UpdateCharactorDto updateDto) {
         return getCharactorFromRepo(user).doOnNext(charactor -> updateDto.updateCharactor(charactor))
                 .flatMap(charactor -> {
                     if (charactor.getAvailableChangeCnt() < 0L)
@@ -27,7 +27,8 @@ public class CharactorService {
                     return Mono.just(charactor);
                 })
                 .flatMap(charactor -> charactorRepository.save(charactor))
-                .doOnError(throwable -> ErrorCode.CANT_UPDATE_CHARACTOR.build());
+                .doOnError(throwable -> ErrorCode.CANT_UPDATE_CHARACTOR.build())
+                .flatMap(charactor -> Mono.just(charactor.extractGetCharactorDto()));
     }
 
     private Mono<Charactor> getCharactorFromRepo(CustomUser user) {
