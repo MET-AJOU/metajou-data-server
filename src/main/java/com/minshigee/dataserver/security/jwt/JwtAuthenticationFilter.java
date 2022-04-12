@@ -25,7 +25,6 @@ public class JwtAuthenticationFilter implements WebFilter {
         ServerHttpRequest request = exchange.getRequest();
 
         if (jwtUtils.isAppropriateRequestForFilter(request)) {
-            System.err.println("12");
             try {
                 String token = jwtUtils.resolveToken(request);
                 Authentication authentication = jwtUtils.getAuthentication(token);

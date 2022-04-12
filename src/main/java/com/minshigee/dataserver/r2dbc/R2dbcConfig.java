@@ -1,8 +1,11 @@
 package com.minshigee.dataserver.r2dbc;
 
 import com.minshigee.dataserver.r2dbc.property.CustomR2dbcProperties;
+import io.r2dbc.pool.PoolingConnectionFactoryProvider.*;
 import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;
+import io.r2dbc.spi.ConnectionFactoryOptions.*;
+
 import io.r2dbc.spi.ConnectionFactoryOptions;
 import io.r2dbc.spi.Option;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Duration;
 
+import static io.r2dbc.pool.PoolingConnectionFactoryProvider.*;
 import static io.r2dbc.spi.ConnectionFactoryOptions.*;
 
 @Configuration
@@ -38,18 +42,23 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
     @Override
     @Bean
     public ConnectionFactory connectionFactory() {
+        //System.err.println(customR2dbcProperties);
         ConnectionFactoryOptions options = ConnectionFactoryOptions.builder()
                 .option(DRIVER, customR2dbcProperties.getDriver())
+                .option(PROTOCOL, customR2dbcProperties.getProtocol())
                 .option(HOST, customR2dbcProperties.getUrl())
                 .option(USER, customR2dbcProperties.getUsername())
                 .option(PORT, customR2dbcProperties.getPort())
                 .option(PASSWORD, customR2dbcProperties.getPassword())
                 .option(DATABASE, customR2dbcProperties.getName())
                 .option(CONNECT_TIMEOUT, Duration.ofSeconds(3))
-                .option(Option.valueOf("socketTimeout"), Duration.ofSeconds(4))
-                .option(Option.valueOf("tcpKeepAlive"), true)
-                .option(Option.valueOf("tcpNoDelay"), true)
+                .option(MAX_SIZE, customR2dbcProperties.maxSize)
+                .option(INITIAL_SIZE, customR2dbcProperties.initialSize)
+                .option(MAX_IDLE_TIME, Duration.ofSeconds(customR2dbcProperties.maxIdleTime))
+                .option(MAX_CREATE_CONNECTION_TIME, Duration.ofSeconds(customR2dbcProperties.maxCreateConnectionTime))
+                //.option(MAX_LIFE_TIME, Duration.ofMinutes(customR2dbcProperties.maxLife))
                 .build();
+
         return ConnectionFactories.get(options);
     }
 

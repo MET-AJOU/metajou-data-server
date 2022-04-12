@@ -10,6 +10,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import javax.validation.constraints.Email;
+
 @Data
 @Builder
 @ToString
@@ -21,6 +23,7 @@ public class Profile {
     @NonNull
     @Column("user_code")
     String userCode;
+    @Email
     @Column("user_email")
     String userEmail;
     @Column("user_name")

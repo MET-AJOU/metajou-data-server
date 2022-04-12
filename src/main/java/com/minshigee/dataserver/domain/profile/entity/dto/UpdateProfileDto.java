@@ -5,10 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
+import javax.validation.constraints.Email;
+
 @Data
 @Builder
 @ToString
 public class UpdateProfileDto {
+    @Email
     String userEmail;
     String userName;
     String userImage;

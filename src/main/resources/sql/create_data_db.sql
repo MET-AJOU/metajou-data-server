@@ -8,3 +8,13 @@ CREATE TABLE `Profile` (
                            UNIQUE KEY `user_code` (`user_code`),
                            UNIQUE KEY `user_email` (`user_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `Charactor` (
+                             `id` int unsigned NOT NULL AUTO_INCREMENT,
+                             `user_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                             `avatar_code` int unsigned NOT NULL DEFAULT '0',
+                             `avatar_custom_code` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'aaaaaaaa',
+                             `available_change_cnt` int unsigned NOT NULL DEFAULT '5',
+                             PRIMARY KEY (`id`),
+                             UNIQUE KEY `user_code` (`user_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -82,7 +82,6 @@ public class JwtUtils {
     }
 
     public Boolean isAppropriateRequestForFilter(ServerHttpRequest request) {
-        System.err.println(tokenName);
         if (!request.getCookies().containsKey(tokenName))
             return false;
         String token = request.getCookies().getFirst(tokenName).getValue();
