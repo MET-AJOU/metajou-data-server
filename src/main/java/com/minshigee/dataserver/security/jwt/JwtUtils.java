@@ -5,26 +5,31 @@ import com.minshigee.dataserver.security.entity.CustomAuthentication;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 
 import javax.annotation.PostConstruct;
 import java.security.Key;
 import java.util.Date;
-import java.util.List;
 
+@Component
 public class JwtUtils {
 
-    private static class Singleton{
-        private static final JwtUtils instance = new JwtUtils();
-    }
+    private static JwtUtils instance;
+
+    @Synchronized
     public static JwtUtils getInstance (){
-        return Singleton.instance;
+        return JwtUtils.instance;
     }
-    private JwtUtils() {}
+
+    private JwtUtils() {
+        instance = this;
+    }
 
     @Value("${spring.project.jjwt.secretkey}")
     private String secret;
@@ -77,6 +82,7 @@ public class JwtUtils {
     }
 
     public Boolean isAppropriateRequestForFilter(ServerHttpRequest request) {
+        System.err.println(tokenName);
         if (!request.getCookies().containsKey(tokenName))
             return false;
         String token = request.getCookies().getFirst(tokenName).getValue();

@@ -60,7 +60,7 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
         initializer.setConnectionFactory(connectionFactory);
         initializer.setDatabasePopulator(
                 new ResourceDatabasePopulator(
-                        new ClassPathResource("sql/create_account_db.sql")
+                        new ClassPathResource("sql/create_data_db.sql")
                 )
         );
         return initializer;

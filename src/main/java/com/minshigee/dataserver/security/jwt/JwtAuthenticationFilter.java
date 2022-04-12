@@ -1,5 +1,6 @@
 package com.minshigee.dataserver.security.jwt;
 
+import com.minshigee.dataserver.exception.ErrorCode;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
@@ -17,16 +18,14 @@ import reactor.core.publisher.Mono;
  */
 public class JwtAuthenticationFilter implements WebFilter {
 
-    private final JwtUtils jwtUtils;
-
-    public JwtAuthenticationFilter(JwtUtils jwtUtils) {
-        this.jwtUtils = jwtUtils;
-    }
+    private final JwtUtils jwtUtils = JwtUtils.getInstance();
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+
         if (jwtUtils.isAppropriateRequestForFilter(request)) {
+            System.err.println("12");
             try {
                 String token = jwtUtils.resolveToken(request);
                 Authentication authentication = jwtUtils.getAuthentication(token);
@@ -36,7 +35,7 @@ public class JwtAuthenticationFilter implements WebFilter {
             }
         }
 
-        return chain.filter(exchange);
+        return Mono.error(ErrorCode.AUTH_TOKEN_ERROR.build());
     }
 
 }
