@@ -1,12 +1,9 @@
 package com.minshigee.dataserver.domain.charactor.entity.dto;
 
 import com.minshigee.dataserver.domain.charactor.entity.Charactor;
-import com.minshigee.dataserver.domain.profile.entity.Profile;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
 import javax.validation.constraints.Size;
@@ -25,7 +22,7 @@ public class UpdateCharactorDto {
     public Charactor updateCharactor(Charactor charactor) {
         if(avatarCode != null)
             charactor.setAvatarCode(avatarCode);
-        if(avatarCustomCode != null)
+        if(avatarCustomCode != null && avatarCustomCode.length() == 8)
             charactor.setAvatarCustomCode(avatarCustomCode);
         charactor.useChangeCount();
         return charactor;

@@ -11,14 +11,10 @@ import javax.validation.constraints.Email;
 @Builder
 @ToString
 public class UpdateProfileDto {
-    @Email
-    String userEmail;
     String userName;
     String userImage;
 
     public Profile updateProfile(Profile profile) {
-        if(userEmail != null)
-            profile.setUserEmail(userEmail);
         if(userName != null)
             profile.setUserName(userName);
         if(userImage != null)
@@ -30,7 +26,6 @@ public class UpdateProfileDto {
         return Profile.builder()
                 .userCode(userCode)
                 .userName(userName)
-                .userEmail(userEmail)
                 .userImage(userImage)
                 .build();
     }

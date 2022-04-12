@@ -15,6 +15,7 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
         Map<String, Object> map = super.getErrorAttributes(request, options);
         map.remove("error");
         map.remove("path");
+        map.remove("trace");
         map.put("state", false);
 
         Throwable throwable = getError(request);
