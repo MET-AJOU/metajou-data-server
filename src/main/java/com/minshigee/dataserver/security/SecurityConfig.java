@@ -35,7 +35,6 @@ import java.util.Arrays;
 })
 public class SecurityConfig {
 
-    private final JwtUtils jwtUtils = JwtUtils.getInstance();
     private final CorsProperties corsProperties;
 
     @Bean
@@ -45,7 +44,7 @@ public class SecurityConfig {
         http.securityContextRepository(NoOpServerSecurityContextRepository.getInstance());
 
         //TODO ADD CUSTOM Filter
-        http.addFilterBefore(new JwtAuthenticationFilter(jwtUtils), SecurityWebFiltersOrder.LAST);
+        http.addFilterBefore(new JwtAuthenticationFilter(), SecurityWebFiltersOrder.FORM_LOGIN);
 
         //TODO ETC
         http.csrf().disable();

@@ -3,6 +3,7 @@ package com.minshigee.dataserver.r2dbc.property;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
@@ -19,4 +20,15 @@ import org.springframework.context.annotation.PropertySource;
 public class CustomR2dbcProperties extends R2dbcProperties {
     private String driver;
     private Integer port;
+    private String protocol;
+    @Qualifier("maxsize")
+    public Integer maxSize;
+    @Qualifier("initialsize")
+    public Integer initialSize;
+    @Qualifier("maxidletime")
+    public long maxIdleTime;
+    @Qualifier("maxcreateconnectiontime")
+    public long maxCreateConnectionTime;
+    @Qualifier("maxlife")
+    public long maxLife;
 }
