@@ -23,7 +23,7 @@ public class Charactor {
     Long id;
     @NonNull
     @Column("user_code")
-    String userCode;
+    Long userCode;
     @Size(max = 192)
     @Column("avatar_code")
     Long avatarCode;

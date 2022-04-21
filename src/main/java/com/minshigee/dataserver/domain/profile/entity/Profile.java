@@ -22,7 +22,7 @@ public class Profile {
     Long id;
     @NonNull
     @Column("user_code")
-    String userCode;
+    Long userCode;
     @Email
     @Column("user_email")
     String userEmail;

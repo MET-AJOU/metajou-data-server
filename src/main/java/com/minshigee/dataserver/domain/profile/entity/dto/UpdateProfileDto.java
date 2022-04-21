@@ -22,7 +22,7 @@ public class UpdateProfileDto {
         return profile;
     }
 
-    public Profile makeProfile(String userCode) {
+    public Profile makeProfile(Long userCode) {
         return Profile.builder()
                 .userCode(userCode)
                 .userName(userName)

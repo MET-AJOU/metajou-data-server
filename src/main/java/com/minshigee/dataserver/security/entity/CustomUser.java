@@ -1,6 +1,7 @@
 package com.minshigee.dataserver.security.entity;
 
 import io.swagger.v3.oas.annotations.Hidden;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,12 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Builder
 @ToString
 @Hidden
 public class CustomUser implements UserDetails {
 
     @Getter
-    private final String userCode;
+    private final Long userCode;
     @Getter
     private final String userEmail;
     @Getter
@@ -31,13 +33,6 @@ public class CustomUser implements UserDetails {
     private Boolean isCredentialsNonExpired = true;
     @Setter
     private Boolean isEnabled = true;
-
-    public CustomUser(String userCode, String userEmail, String accessToken, ArrayList<? extends GrantedAuthority> authorities) {
-        this.userCode = userCode;
-        this.userEmail = userEmail;
-        this.token = accessToken;
-        this.authorities = authorities;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

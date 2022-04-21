@@ -49,8 +49,8 @@ public class JwtUtils {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
-    public String getUserCodeFromToken(String token) {
-        return getAllClaimsFromToken(token).getSubject();
+    public Long getUserCodeFromToken(String token) {
+        return Long.valueOf(getAllClaimsFromToken(token).getSubject());
     }
 
     public Date getExpirationDateFromToken(String token) {

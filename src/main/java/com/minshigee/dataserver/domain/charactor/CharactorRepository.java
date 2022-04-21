@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface CharactorRepository extends ReactiveCrudRepository<Charactor, Long> {
-    public Mono<Charactor> findCharactorByUserCode(String userCode);
+    public Mono<Charactor> findCharactorByUserCode(Long userCode);
 }
