@@ -1,6 +1,6 @@
 package com.minshigee.dataserver.domain.profile.entity;
 
-import com.minshigee.dataserver.domain.profile.entity.dto.GetProfileDto;
+import com.minshigee.dataserver.domain.profile.dto.GetProfileDto;
 import com.minshigee.dataserver.security.entity.CustomUser;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.minshigee.dataserver.domain.charactor.entity.dto;
+package com.minshigee.dataserver.domain.charactor.dto;
 
 import lombok.Builder;
 import lombok.Data;

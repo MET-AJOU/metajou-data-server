@@ -1,6 +1,6 @@
 package com.minshigee.dataserver.domain.charactor.entity;
 
-import com.minshigee.dataserver.domain.charactor.entity.dto.GetCharactorDto;
+import com.minshigee.dataserver.domain.charactor.dto.GetCharactorDto;
 import com.minshigee.dataserver.security.entity.CustomUser;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +27,6 @@ public class Charactor {
     @Size(max = 192)
     @Column("avatar_code")
     Long avatarCode;
-    @Size(min = 8, max = 8)
     @Column("avatar_custom_code")
     String avatarCustomCode;
     @Column("available_change_cnt")

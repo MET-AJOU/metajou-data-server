@@ -1,4 +1,4 @@
-package com.minshigee.dataserver.domain.profile.entity.dto;
+package com.minshigee.dataserver.domain.profile.dto;
 
 import com.minshigee.dataserver.domain.profile.entity.Profile;
 import lombok.Builder;

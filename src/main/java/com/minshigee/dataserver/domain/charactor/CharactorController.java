@@ -1,9 +1,7 @@
 package com.minshigee.dataserver.domain.charactor;
 
-import com.minshigee.dataserver.domain.charactor.entity.dto.GetCharactorDto;
-import com.minshigee.dataserver.domain.charactor.entity.dto.UpdateCharactorDto;
-import com.minshigee.dataserver.domain.profile.ProfileController;
-import com.minshigee.dataserver.domain.profile.entity.dto.GetProfileDto;
+import com.minshigee.dataserver.domain.charactor.dto.GetCharactorDto;
+import com.minshigee.dataserver.domain.charactor.dto.UpdateCharactorDto;
 import com.minshigee.dataserver.response.BaseResponse;
 import com.minshigee.dataserver.response.ResponseWrapper;
 import com.minshigee.dataserver.security.entity.CustomUser;

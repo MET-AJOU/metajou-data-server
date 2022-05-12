@@ -1,8 +1,8 @@
 package com.minshigee.dataserver.domain.charactor;
 
 import com.minshigee.dataserver.domain.charactor.entity.Charactor;
-import com.minshigee.dataserver.domain.charactor.entity.dto.GetCharactorDto;
-import com.minshigee.dataserver.domain.charactor.entity.dto.UpdateCharactorDto;
+import com.minshigee.dataserver.domain.charactor.dto.GetCharactorDto;
+import com.minshigee.dataserver.domain.charactor.dto.UpdateCharactorDto;
 import com.minshigee.dataserver.exception.ErrorCode;
 import com.minshigee.dataserver.security.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 public class CharactorService {
 
     private final CharactorRepository charactorRepository;
+    private final static String objectStoragePrefixUrl = "http://localhost/";
 
     public Mono<GetCharactorDto> getCharactor(CustomUser user) {
         return getCharactorFromRepo(user).flatMap(charactor -> Mono.just(charactor.extractGetCharactorDto()));

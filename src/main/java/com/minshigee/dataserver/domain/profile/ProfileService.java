@@ -1,8 +1,8 @@
 package com.minshigee.dataserver.domain.profile;
 
 import com.minshigee.dataserver.domain.profile.entity.Profile;
-import com.minshigee.dataserver.domain.profile.entity.dto.GetProfileDto;
-import com.minshigee.dataserver.domain.profile.entity.dto.UpdateProfileDto;
+import com.minshigee.dataserver.domain.profile.dto.GetProfileDto;
+import com.minshigee.dataserver.domain.profile.dto.UpdateProfileDto;
 import com.minshigee.dataserver.exception.ErrorCode;
 import com.minshigee.dataserver.security.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
