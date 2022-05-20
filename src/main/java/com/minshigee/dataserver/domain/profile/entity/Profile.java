@@ -34,7 +34,7 @@ public class Profile {
     public static Profile createProfileByAuthUserInfo(CustomUser user) {
         return Profile.builder()
                 .userCode(user.getUserCode())
-                .userName(user.getUserEmail().split("@")[0])
+                .userName(null)
                 .userEmail(user.getUserEmail())
                 .userImage(null)
                 .build();

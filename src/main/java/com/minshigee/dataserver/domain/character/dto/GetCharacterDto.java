@@ -1,4 +1,4 @@
-package com.minshigee.dataserver.domain.charactor.dto;
+package com.minshigee.dataserver.domain.character.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +10,7 @@ import javax.validation.constraints.Size;
 @ToString
 @Data
 @Builder
-public class GetCharactorDto {
-    @Size(max = 192)
-    @Column("avatar_code")
-    Long avatarCode;
+public class GetCharacterDto {
     @Size(min = 8, max = 8)
     @Column("avatar_custom_code")
     String avatarCustomCode;

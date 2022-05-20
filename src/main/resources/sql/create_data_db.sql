@@ -12,8 +12,7 @@ CREATE TABLE `Profile` (
 CREATE TABLE `Charactor` (
                              `id` int unsigned NOT NULL AUTO_INCREMENT,
                              `user_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                             `avatar_code` int unsigned NOT NULL DEFAULT '0',
-                             `avatar_custom_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                             `avatar_custom_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
                              `available_change_cnt` int unsigned NOT NULL DEFAULT '5',
                              PRIMARY KEY (`id`),
                              UNIQUE KEY `user_code` (`user_code`)

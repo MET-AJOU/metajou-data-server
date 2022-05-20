@@ -1,6 +1,6 @@
-package com.minshigee.dataserver.domain.charactor.dto;
+package com.minshigee.dataserver.domain.character.dto;
 
-import com.minshigee.dataserver.domain.charactor.entity.Charactor;
+import com.minshigee.dataserver.domain.character.entity.Character;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -11,17 +11,12 @@ import javax.validation.constraints.Size;
 @Data
 @Builder
 @ToString
-public class UpdateCharactorDto {
-    @Size(max = 192)
-    @Column("avatar_code")
-    Long avatarCode;
+public class UpdateCharacterDto {
     @Size(min = 8, max = 8)
     @Column("avatar_custom_code")
     String avatarCustomCode;
 
-    public Charactor updateCharactor(Charactor charactor) {
-        if(avatarCode != null)
-            charactor.setAvatarCode(avatarCode);
+    public Character updateCharactor(Character charactor) {
         if(avatarCustomCode != null && avatarCustomCode.length() == 8)
             charactor.setAvatarCustomCode(avatarCustomCode);
         charactor.useChangeCount();

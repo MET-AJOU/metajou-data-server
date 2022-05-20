@@ -18,12 +18,15 @@ import reactor.core.publisher.Mono;
  */
 public class JwtAuthenticationFilter implements WebFilter {
 
-    private final JwtUtils jwtUtils = JwtUtils.getInstance();
+    private final JwtUtils jwtUtils;
+
+    public JwtAuthenticationFilter(JwtUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-
         if (jwtUtils.isAppropriateRequestForFilter(request)) {
             try {
                 String token = jwtUtils.resolveToken(request);
@@ -34,7 +37,7 @@ public class JwtAuthenticationFilter implements WebFilter {
             }
         }
 
-        return Mono.error(ErrorCode.AUTH_TOKEN_ERROR.build());
+        return chain.filter(exchange);
     }
 
 }
