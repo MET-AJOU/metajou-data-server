@@ -17,7 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 **/secret.properties
-
+**/resources/oci/**
 ### IntelliJ IDEA ###
 .idea
 *.iws

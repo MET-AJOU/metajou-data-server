@@ -1,40 +1,49 @@
 package com.minshigee.dataserver.domain.model3d;
 
+import com.minshigee.dataserver.domain.utils.ModelObjectStorageUtil;
+import com.oracle.bmc.ConfigFileReader;
+import com.oracle.bmc.Region;
+import com.oracle.bmc.auth.AuthenticationDetailsProvider;
+import com.oracle.bmc.auth.ConfigFileAuthenticationDetailsProvider;
+import com.oracle.bmc.objectstorage.ObjectStorage;
+import com.oracle.bmc.objectstorage.ObjectStorageClient;
+import com.oracle.bmc.objectstorage.model.CopyObjectDetails;
+import com.oracle.bmc.objectstorage.requests.CopyObjectRequest;
+import com.oracle.bmc.objectstorage.requests.GetBucketRequest;
+import com.oracle.bmc.objectstorage.requests.GetNamespaceRequest;
+import com.oracle.bmc.objectstorage.responses.CopyObjectResponse;
+import com.oracle.bmc.objectstorage.responses.GetBucketResponse;
+import com.oracle.bmc.objectstorage.responses.GetNamespaceResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+@SpringBootTest(classes = {ModelObjectStorageUtil.class})
 public class ObjectStorageClientTest {
 
-    private final String masterObjectStoragePrefixUrl = "https://objectstorage.ap-chuncheon-1.oraclecloud.com/p/qL3GahaUtYDzmzzgjsWlNtLjBJ4C60FKnsdWKvCt7qw1tYMWQ2JtFfNbu_x3sQEI/n/axgga8ceqe0b/b/Metajou3dModels";
-    private final String localObjectStorageNamespaceName = "axgga8ceqe0b";
-    private final String localObjectStorageBucketName = "Metajou3dModels";
-    private final String localObjectStorageRegionName = "ap-chuncheon-1";
-    private WebClient webClient = WebClient.create(masterObjectStoragePrefixUrl);
+    @Autowired
+    ModelObjectStorageUtil util;
 
     @Test
-    public void updateDataTest() {
-        replicationConstDataToUser("minshigee", "0.0.0.0").subscribe(s -> {System.err.println(s);});
+    public void testCopyModelObjectStorage() throws Exception {
+        util.copyObject("const/0.0.0.0.fbx","usr/alstjr1642.fbx").subscribe();
         while(true);
     }
 
-    public Mono<String> replicationConstDataToUser(String userName, String avatarCode) {
-        MultiValueMap<String, String> bodyValues = new LinkedMultiValueMap<>();
-        bodyValues.add("sourceObjectName","/const/" + avatarCode + ".fbx");
-        bodyValues.add("destinationRegion",localObjectStorageRegionName);
-        bodyValues.add("destinationNamespace",localObjectStorageNamespaceName);
-        bodyValues.add("destinationBucket",localObjectStorageBucketName);
-        bodyValues.add("destinationObjectName","/usr/" + userName + ".fbx");
-        return webClient.post().uri("/actions/copyObject")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .accept(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromFormData(bodyValues))
-                .retrieve()
-                .bodyToMono(String.class);
+    @Test
+    public void testDeleteModelObjectStorage() throws Exception {
+        Flux.interval(Duration.ofSeconds(1l)).filter(i -> i <= 22 && i >= 1)
+                .flatMap(i -> util.deleteObject("usr/" + i + ".fbx")).subscribe();
+        while(true);
     }
+
 }
