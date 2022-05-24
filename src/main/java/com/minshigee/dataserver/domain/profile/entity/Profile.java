@@ -1,6 +1,6 @@
 package com.minshigee.dataserver.domain.profile.entity;
 
-import com.minshigee.dataserver.domain.profile.entity.dto.GetProfileDto;
+import com.minshigee.dataserver.domain.profile.dto.GetProfileDto;
 import com.minshigee.dataserver.security.entity.CustomUser;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class Profile {
     Long id;
     @NonNull
     @Column("user_code")
-    String userCode;
+    Long userCode;
     @Email
     @Column("user_email")
     String userEmail;
@@ -34,7 +34,7 @@ public class Profile {
     public static Profile createProfileByAuthUserInfo(CustomUser user) {
         return Profile.builder()
                 .userCode(user.getUserCode())
-                .userName(user.getUserEmail().split("@")[0])
+                .userName(null)
                 .userEmail(user.getUserEmail())
                 .userImage(null)
                 .build();

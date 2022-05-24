@@ -1,4 +1,4 @@
-package com.minshigee.dataserver.domain.profile.entity.dto;
+package com.minshigee.dataserver.domain.profile.dto;
 
 import com.minshigee.dataserver.domain.profile.entity.Profile;
 import lombok.Builder;
@@ -22,7 +22,7 @@ public class UpdateProfileDto {
         return profile;
     }
 
-    public Profile makeProfile(String userCode) {
+    public Profile makeProfile(Long userCode) {
         return Profile.builder()
                 .userCode(userCode)
                 .userName(userName)

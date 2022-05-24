@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface ProfileRepository extends ReactiveCrudRepository<Profile, Long> {
-    public Mono<Profile> findProfileByUserCode(String userCode);
+    public Mono<Profile> findProfileByUserCode(Long userCode);
 }
